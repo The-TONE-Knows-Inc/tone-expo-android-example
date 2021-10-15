@@ -52,7 +52,7 @@ allprojects {
 dependencies {
     ...
     //framework
-    implementation 'com.github.The-TONE-Knows-Inc:framework-core-tone-android:1.8'
+    implementation 'com.github.The-TONE-Knows-Inc:framework-core-tone-android:v0.0.1'
     ...
     implementation "com.facebook.react:react-native:+"  // From node_modules
 }
