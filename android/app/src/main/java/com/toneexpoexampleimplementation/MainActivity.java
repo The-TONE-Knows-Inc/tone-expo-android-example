@@ -65,8 +65,6 @@ public class MainActivity extends ReactActivity implements ToneUIEventListener {
         };
     }
 
-
-
     //This override start the service after permissions request
   @Override
   public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
@@ -82,6 +80,19 @@ public class MainActivity extends ReactActivity implements ToneUIEventListener {
     }
   }
 
+  @Override
+  public void onResume(){
+    super.onResume();
+    if(toneFramework != null){
+      toneFramework.turnNotificationsOn(false);
+    }
+  }
+
+  @Override
+  public void onPause(){
+    super.onPause();
+    toneFramework.turnNotificationsOn(true);
+  }
   //This override handle the response from the service with the app open
   @Override
   public void onToneReceived(ToneModel toneModel) {
