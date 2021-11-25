@@ -52,7 +52,7 @@ allprojects {
 dependencies {
     ...
     //framework
-    implementation 'com.github.The-TONE-Knows-Inc:framework-core-tone-android:v0.0.1'
+    implementation 'com.github.The-TONE-Knows-Inc:framework-core-tone-android:v0.0.4'
     ...
     implementation "com.facebook.react:react-native:+"  // From node_modules
 }
@@ -168,7 +168,7 @@ Inside the Override _**onCreate**_ method add the follow code to obtain the Reac
   }
 ```
 
-There's just  2 more Overrides to implement, one to handle permission request and the other to create the Bridge and send the response to the UI
+There's just  2 more Overrides to implement, one to handle permission request and the other to create the Bridge and send the response to the UI and 2 more to handle notification that's gonna be onPause and onResume
 ``` java
   //This override start the service after permissions request
   @Override
@@ -185,6 +185,19 @@ There's just  2 more Overrides to implement, one to handle permission request an
     }
   }
 
+   @Override
+  public void onResume(){
+    super.onResume();
+    if(toneFramework != null){
+      toneFramework.turnNotificationsOn(false);
+    }
+  }
+
+  @Override
+  public void onPause(){
+    super.onPause();
+    toneFramework.turnNotificationsOn(true);
+  }
   //This override handle the response from the service with the app open
   @Override
   public void onToneReceived(ToneModel toneModel) {
